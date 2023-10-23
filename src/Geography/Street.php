@@ -78,7 +78,7 @@ class Street implements ValueObjectInterface
             '%elements%' => $this->getElements(),
         ];
 
-        $streetString = str_replace(array_keys($replacements), array_values($replacements), $this->format);
+        $streetString = str_replace(array_keys($replacements), array_values($replacements), $this->format->toNative());
 
         return $streetString;
     }

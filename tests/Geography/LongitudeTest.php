@@ -18,9 +18,9 @@ class LongitudeTest extends TestCase
         $this->assertEquals(-179, $longitude->toNative());
     }
 
-    /** @expectedException \TypeError */
     public function testInvalidLongitude()
     {
+        $this->expectException(\TypeError::class);
         new Longitude('invalid');
     }
 }

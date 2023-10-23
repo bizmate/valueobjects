@@ -14,7 +14,7 @@ class DictionaryTest extends TestCase
     /** @var Dictionary */
     protected $dictionary;
 
-    public function setup()
+    public function setUp(): void
     {
         $array = \SplFixedArray::fromArray(array(
             new KeyValuePair(new Integer(0), new StringLiteral('zero')),
@@ -45,9 +45,10 @@ class DictionaryTest extends TestCase
         $this->assertTrue($constructedDictionary->sameValueAs($fromNativeDictionary));
     }
 
-    /** @expectedException \InvalidArgumentException */
     public function testInvalidArgument()
     {
+        $this->expectException(\InvalidArgumentException::class);
+    
         $array = \SplFixedArray::fromArray(array('one', 'two', 'three'));
 
         new Dictionary($array);

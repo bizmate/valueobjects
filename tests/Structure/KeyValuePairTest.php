@@ -13,7 +13,7 @@ class KeyValuePairTest extends TestCase
     /** @var KeyValuePair */
     protected $keyValuePair;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->keyValuePair = new KeyValuePair(
             new StringLiteral('key'),
@@ -27,9 +27,9 @@ class KeyValuePairTest extends TestCase
         $this->assertTrue($this->keyValuePair->sameValueAs($fromNativePair));
     }
 
-    /** @expectedException \BadMethodCallException */
     public function testInvalidFromNative()
     {
+        $this->expectException(\BadMethodCallException::class);
         KeyValuePair::fromNative('key', 'value', 'invalid');
     }
 

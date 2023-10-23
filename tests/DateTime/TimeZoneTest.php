@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\DateTime;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\DateTime\Exception\InvalidTimeZoneException;
 use ValueObjects\StringLiteral\StringLiteral;
 use ValueObjects\DateTime\TimeZone;
 use ValueObjects\ValueObjectInterface;
@@ -69,12 +70,10 @@ class TimeZoneTest extends TestCase
 
         $this->assertEquals('Europe/Madrid', $timeZone->__toString());
     }
-
-    /**
-     * @expectedException \ValueObjects\DateTime\Exception\InvalidTimeZoneException
-     */
+    
     public function testExceptionOnInvalidTimeZoneName()
     {
+        $this->expectException(InvalidTimeZoneException::class);
         $timeZone = new TimeZone(new StringLiteral('Mars/Phobos'));
     }
 }

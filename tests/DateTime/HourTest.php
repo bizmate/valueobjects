@@ -4,6 +4,7 @@ namespace ValueObjects\Tests\DateTime;
 
 use PHPUnit\Framework\TestCase;
 use ValueObjects\DateTime\Hour;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 
 class HourTest extends TestCase
 {
@@ -21,9 +22,9 @@ class HourTest extends TestCase
         $this->assertEquals(date('G'), $hour->toNative());
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidHour()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
         new Hour(24);
     }
 

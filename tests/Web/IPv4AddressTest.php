@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\Web;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Web\IPv4Address;
 
 class IPv4AddressTest extends TestCase
@@ -14,9 +15,10 @@ class IPv4AddressTest extends TestCase
         $this->assertInstanceOf('ValueObjects\Web\IPv4Address', $ip);
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidIPv4Address()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
+    
         new IPv4Address('::1');
     }
 }

@@ -1,8 +1,8 @@
-FROM php:7.0.22-cli
+FROM php:8.2-cli
 MAINTAINER Diego Gullo <diego_gullo@bizmate.biz>
 
 RUN apt-get update && apt-get install -y ssh git zip locales locales-all wget\
-	&& pecl install xdebug-2.9.0 && docker-php-ext-enable xdebug && apt-get clean \
+	&& pecl install xdebug-3.2.2 && docker-php-ext-enable xdebug && docker-php-ext-install bcmath && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer

@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\Web;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Web\IPAddress;
 use ValueObjects\Web\IPAddressVersion;
 
@@ -17,9 +18,10 @@ class IPAddressTest extends TestCase
         $this->assertSame(IPAddressVersion::IPV6(), $ip6->getVersion());
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidIPAddress()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
+    
         new IPAddress('invalid');
     }
 }

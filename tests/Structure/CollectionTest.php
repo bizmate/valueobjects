@@ -15,7 +15,7 @@ class CollectionTest extends TestCase
     /** @var Collection */
     protected $collection;
 
-    public function setup()
+    public function setUp(): void
     {
         $array = new \SplFixedArray(3);
         $array->offsetSet(0, new StringLiteral('one'));
@@ -25,9 +25,9 @@ class CollectionTest extends TestCase
         $this->collection = new Collection($array);
     }
 
-    /** @expectedException \InvalidArgumentException */
     public function testInvalidArgument()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $array = \SplFixedArray::fromArray(['one', 'two', 'three']);
 
         new Collection($array);

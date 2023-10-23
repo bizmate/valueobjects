@@ -12,7 +12,7 @@ class NameTest extends TestCase
     /** @var Name */
     private $name;
 
-    protected function setup()
+    protected function setup(): void
     {
         $this->name = new Name(
             new StringLiteral('foo'),
