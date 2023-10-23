@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\Web;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Web\SchemeName;
 
 class SchemeNameTest extends TestCase
@@ -13,9 +14,9 @@ class SchemeNameTest extends TestCase
         $this->assertInstanceOf('ValueObjects\Web\SchemeName', $scheme);
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidSchemeName()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
         new SchemeName('ht*tp');
     }
 }

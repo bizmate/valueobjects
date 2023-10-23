@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\Number;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Number\Real;
 use ValueObjects\Number\Integer;
 use ValueObjects\Number\Natural;
@@ -10,7 +11,7 @@ use ValueObjects\ValueObjectInterface;
 
 class RealTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         # When tests run in a different locale, this might affect the decimal-point character and thus the validation
         # of floats. This makes sure the tests run in a locale that the tests are known to be working in.
@@ -46,9 +47,10 @@ class RealTest extends TestCase
         $this->assertFalse($real1->sameValueAs($mock));
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidNativeArgument()
     {
+        $this->expectException(\TypeError::class);
+    
         new Real('invalid');
     }
 
@@ -70,10 +72,12 @@ class RealTest extends TestCase
         $this->assertTrue($natural->sameValueAs($nativeNatural));
     }
 
-    public function testToString($expectedString = '0.7')
+    public function testToString()
     {
+        $expectedString = '0.7';
         $real = new Real(.7);
-        $this->assertEquals($expectedString, $real->__toString());
+        $realToString = $real->__toString();
+        $this->assertEquals($expectedString, $realToString, "String expected : " . $expectedString . " and actual: " . $realToString);
     }
 
     public function testDifferentLocaleWithDifferentDecimalCharacter()

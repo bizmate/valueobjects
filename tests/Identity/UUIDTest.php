@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Identity;
 
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Identity\UUID;
 use PHPUnit\Framework\TestCase;
 use ValueObjects\ValueObjectInterface;
@@ -11,8 +12,8 @@ class UUIDTest extends TestCase
     public function testGenerateAsString()
     {
         $uuidString = UUID::generateAsString();
-
-        $this->assertRegexp('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $uuidString);
+        
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $uuidString);
     }
 
     public function testFromNative()
@@ -37,9 +38,9 @@ class UUIDTest extends TestCase
         $this->assertFalse($uuid1->sameValueAs($mock));
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalid()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
         new UUID('invalid');
     }
 }

@@ -19,7 +19,7 @@ class UrlTest extends TestCase
     /** @var Url */
     protected $url;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->url = new Url(
             new SchemeName('http'),
@@ -33,7 +33,7 @@ class UrlTest extends TestCase
         );
     }
     
-    public function fromNativeProviderValidUrls(){
+    public static function fromNativeProviderValidUrls(){
         return [
             [ 'http://user:pass@foo.com:80/bar?querystring#fragmentidentifier' ],
             [ 'http://www.test.com' ],
@@ -46,14 +46,14 @@ class UrlTest extends TestCase
     /**
      * @dataProvider fromNativeProviderValidUrls
      */
-    public function testFromNativeWithValidUrl($nativeUrlString)
+    public static function testFromNativeWithValidUrl($nativeUrlString)
     {
         $fromNativeUrl = Url::fromNative($nativeUrlString);
 
-        $this->assertSame($nativeUrlString, $fromNativeUrl->__toString());
+        self::assertSame($nativeUrlString, $fromNativeUrl->__toString());
     }
     
-    public function fromNativeProviderInvalidUrls(){
+    public static function fromNativeProviderInvalidUrls(){
         return [
             [ 'foo.com:80/bar?querystring#fragmentidentifier' ],
             [ 'www.test.com' ],
@@ -63,10 +63,11 @@ class UrlTest extends TestCase
     
     /**
      * @dataProvider fromNativeProviderInvalidUrls
-     * @expectedException \InvalidArgumentException
      */
     public function testFromNativeWithInvalidUrl($nativeUrlString)
     {
+        $this->expectException(\InvalidArgumentException::class);
+    
         Url::fromNative($nativeUrlString);
     }
 

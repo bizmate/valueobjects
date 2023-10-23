@@ -11,7 +11,7 @@ class StreetTest extends TestCase
 {
     protected $street;
 
-    protected function setup()
+    protected function setUp(): void
     {
         $this->street = new Street(
             new StringLiteral('Abbey Rd'),
@@ -27,9 +27,10 @@ class StreetTest extends TestCase
         $this->assertTrue($this->street->sameValueAs($fromNativeStreet));
     }
 
-    /** @expectedException \BadMethodCallException */
     public function testInvalidFromNative()
     {
+        $this->expectException(\BadMethodCallException::class);
+    
         Street::fromNative('Abbey Rd');
     }
 

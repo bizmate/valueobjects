@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\Web;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Web\Path;
 
 class PathTest extends TestCase
@@ -14,9 +15,10 @@ class PathTest extends TestCase
         $this->assertEquals($pathString, $path->toNative());
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidPath()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
+    
         new Path('//valid?');
     }
 }

@@ -8,6 +8,24 @@ services:
     user: $UID
     working_dir: /var/www/html
     command: composer install --ignore-platform-reqs
+    environment:
+      - XDEBUG_MODE=coverage
+
+  composer:
+    build:
+      context: docker/composer
+    user: $UID
+    volumes:
+      - websrc:/app
+      - ${COMPOSER_HOME}:/home/composer/.config/composer
+      - ${COMPOSER_CACHE_DIR}:/home/composer/.cache/composer
+      - ${HOME}/.gitconfig:/home/composer/.gitconfig:Z
+    command: composer install
+    working_dir: /app
+    environment:
+      - COMPOSER_HOME=/home/composer
+      - HOME=/home/composer
+      - XDEBUG_MODE=coverage
 
 volumes:
   websrc:

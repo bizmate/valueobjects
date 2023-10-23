@@ -6,14 +6,14 @@ use PHPUnit\Framework\TestCase;
 
 class FahrenheitTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         # When tests run in a different locale, this might affect the decimal-point character and thus the validation
         # of floats. This makes sure the tests run in a locale that the tests are known to be working in.
         setlocale(LC_ALL, "en_US.UTF-8");
     }
 
-    public function temperatureProvider()
+    public static function temperatureProvider()
     {
         return array(array(new Fahrenheit(10)));
     }
@@ -23,7 +23,11 @@ class FahrenheitTest extends TestCase
      */
     public function testToCelsius(Fahrenheit $temperature)
     {
-        $this->assertEquals((10 - 32) / 1.8, $temperature->toCelsius()->toNative());
+        $expected = (10 - 32) / 1.8;
+        $result = $temperature->toCelsius()->toNative();
+        
+        $this->assertEquals(0, $expected-$result);
+        $this->assertEquals($expected, $result);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\Web;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Web\EmailAddress;
 
 class EmailAddressTest extends TestCase
@@ -16,9 +17,10 @@ class EmailAddressTest extends TestCase
         $this->assertInstanceOf('ValueObjects\Web\EmailAddress', $email2);
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidEmailAddress()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
+    
         new EmailAddress('invalid');
     }
 

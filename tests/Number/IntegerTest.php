@@ -3,6 +3,7 @@
 namespace ValueObjects\Tests\Number;
 
 use PHPUnit\Framework\TestCase;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 use ValueObjects\Number\Integer;
 use ValueObjects\Number\Real;
 use ValueObjects\ValueObjectInterface;
@@ -36,9 +37,10 @@ class IntegerTest extends TestCase
         $this->assertSame('87', $integer->__toString());
     }
 
-    /** @expectedException \ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidNativeArgument()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
+    
         new Integer(23.4);
     }
 

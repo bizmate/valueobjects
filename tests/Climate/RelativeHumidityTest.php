@@ -4,6 +4,7 @@ namespace ValueObjects\Tests\Climate;
 
 use PHPUnit\Framework\TestCase;
 use ValueObjects\Climate\RelativeHumidity;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 
 class RelativeHumidityTest extends TestCase
 {
@@ -14,12 +15,13 @@ class RelativeHumidityTest extends TestCase
 
         $this->assertTrue($fromNativeRelHum->sameValueAs($constructedRelHum));
     }
-
+    
     /**
-     * @expectedException \ValueObjects\Exception\InvalidNativeArgumentException
+     * @return void
      */
-    public function testInvalidRelativeHumidity()
+    public function testInvalidRelativeHumidity(): void
     {
+        $this->expectException(InvalidNativeArgumentException::class);
         new RelativeHumidity(128);
     }
 }

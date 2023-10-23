@@ -15,7 +15,7 @@ class AddressTest extends TestCase
     /** @var Address */
     protected $address;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->address = new Address(
             new StringLiteral('Nicolò Pignatelli'),
@@ -34,9 +34,10 @@ class AddressTest extends TestCase
         $this->assertTrue($this->address->sameValueAs($fromNativeAddress));
     }
 
-    /** @expectedException \BadMethodCallException */
     public function testInvalidFromNative()
     {
+        $this->expectException(\BadMethodCallException::class);
+    
         Address::fromNative('invalid');
     }
 

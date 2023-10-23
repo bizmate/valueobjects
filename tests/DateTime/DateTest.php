@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ValueObjects\Tests\DateTime;
 
+use ValueObjects\DateTime\Exception\InvalidDateException;
 use ValueObjects\DateTime\Month;
 use ValueObjects\DateTime\MonthDay;
 use ValueObjects\DateTime\Year;
@@ -36,9 +37,9 @@ class DateTest extends TestCase
         $this->assertEquals(date('Y-n-j'), \strval($date));
     }
 
-    /** @expectedException \ValueObjects\DateTime\Exception\InvalidDateException */
     public function testAlmostValidDateException()
     {
+        $this->expectException(InvalidDateException::class);
         new Date(new Year(2013), Month::FEBRUARY(), new MonthDay(31));
     }
 

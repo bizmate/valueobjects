@@ -7,9 +7,10 @@ use ValueObjects\NullValue\NullValue;
 
 class NullValueTest extends TestCase
 {
-    /** @expectedException \BadMethodCallException */
     public function testFromNative()
     {
+        $this->expectException(\BadMethodCallException::class);
+    
         NullValue::fromNative();
     }
 

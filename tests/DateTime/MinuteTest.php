@@ -4,6 +4,7 @@ namespace ValueObjects\Tests\DateTime;
 
 use PHPUnit\Framework\TestCase;
 use ValueObjects\DateTime\Minute;
+use ValueObjects\Exception\InvalidNativeArgumentException;
 
 class MinuteTest extends TestCase
 {
@@ -21,9 +22,9 @@ class MinuteTest extends TestCase
         $this->assertEquals(\intval(date('i')), $minute->toNative());
     }
 
-    /** @expectedException ValueObjects\Exception\InvalidNativeArgumentException */
     public function testInvalidMinute()
     {
+        $this->expectException(InvalidNativeArgumentException::class);
         new Minute(60);
     }
 
