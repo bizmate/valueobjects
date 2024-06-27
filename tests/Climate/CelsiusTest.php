@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ValueObjects\Tests\Climate;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use ValueObjects\Climate\Celsius;
 use PHPUnit\Framework\TestCase;
 
@@ -19,34 +20,26 @@ class CelsiusTest extends TestCase
     {
         return array(array(new Celsius(10)));
     }
-
-    /**
-     * @dataProvider temperatureProvider
-     */
+    
+    #[DataProvider('temperatureProvider')]
     public function testToCelsius(Celsius $temperature)
     {
         $this->assertEquals(10, $temperature->toCelsius()->toNative());
     }
-
-    /**
-     * @dataProvider temperatureProvider
-     */
+    
+    #[DataProvider('temperatureProvider')]
     public function testToKelvin(Celsius $temperature)
     {
         $this->assertEquals(10 + 273.15, $temperature->toKelvin()->toNative());
     }
-
-    /**
-     * @dataProvider temperatureProvider
-     */
+    
+    #[DataProvider('temperatureProvider')]
     public function testToFahrenheit(Celsius $temperature)
     {
         $this->assertEquals(10 * 1.8 + 32, $temperature->toFahrenheit()->toNative());
     }
-
-    /**
-     * @dataProvider temperatureProvider
-     */
+    
+    #[DataProvider('temperatureProvider')]
     public function testDifferentLocaleWithDifferentDecimalCharacter(Celsius $temperature)
     {
         setlocale(LC_ALL, "de_DE.UTF-8");

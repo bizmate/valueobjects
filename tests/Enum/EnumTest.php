@@ -22,7 +22,7 @@ class EnumTest extends TestCase
             ->disableOriginalConstructor()->getMock();
         $stub1->expects($this->any())
             ->method('sameValueAs')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->assertTrue($stub1->sameValueAs($stub2));
     }

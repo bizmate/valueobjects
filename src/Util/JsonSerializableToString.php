@@ -9,7 +9,7 @@ namespace ValueObjects\Util;
 
 trait JsonSerializableToString
 {
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->__toString();
     }

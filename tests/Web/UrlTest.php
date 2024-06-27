@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Web;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use ValueObjects\StringLiteral\StringLiteral;
 use PHPUnit\Framework\TestCase;
 use ValueObjects\Web\FragmentIdentifier;
@@ -42,10 +43,8 @@ class UrlTest extends TestCase
             [ 'http://www.test.com/#fragmentidentifier' ]
         ];
     }
-    
-    /**
-     * @dataProvider fromNativeProviderValidUrls
-     */
+
+    #[DataProvider('fromNativeProviderValidUrls')]
     public static function testFromNativeWithValidUrl($nativeUrlString)
     {
         $fromNativeUrl = Url::fromNative($nativeUrlString);
@@ -61,9 +60,7 @@ class UrlTest extends TestCase
         ];
     }
     
-    /**
-     * @dataProvider fromNativeProviderInvalidUrls
-     */
+    #[DataProvider('fromNativeProviderInvalidUrls')]
     public function testFromNativeWithInvalidUrl($nativeUrlString)
     {
         $this->expectException(\InvalidArgumentException::class);
